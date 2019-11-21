@@ -28,4 +28,7 @@ int main (int argc, char **argv){
 	std::cout << twoDirDiff(x, y)[1] << std::endl;
 	std::cout << twoDirDiff(std::vector<double> ({x[1], x[2], x[3]}),
 											twoDirDiff(x, y))[0] << std::endl;
+	std::cout << std::endl;
+	std::cout << oneDirDiff(std::vector<double> ({x[0], x[1], x[2], x[3]}),
+	 										oneDirDiff(x, y))[1] << std::endl;
 }
