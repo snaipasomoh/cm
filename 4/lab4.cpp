@@ -124,10 +124,13 @@ double getValInX (simsym const &pol, double x){
 int main (int argc, char **argv){
 	std::vector<double> xVal {0, 1, 2, 3, 4};
 	std::vector<double> yVal {1, 0.86603, 0.5, 0, -0.5};
+	// std::vector<double> xVal {0.1, 0.5, 0.9, 1.3, 1.7};
+	// std::vector<double> yVal {-2.3026, -0.69315, -0.10536, 0.26236, 0.53063};
 
 	eqVectors vec = vecForSpline(xVal, yVal, thomasMethod(vecForThomas(xVal, yVal)));
 	std::vector<simsym> splines = makeSplines(vec, xVal);
 	std::cout << getValInX(splines[1], 1.5) << std::endl;
+	std::cout << getValInX(splines[0].getDiff(), 1) << " " << getValInX(splines[1].getDiff(), 1) << std::endl;
 	// for (auto i : thomasMethod(vec)){
 	// 	std::cout << i << std::endl;
 	// }
