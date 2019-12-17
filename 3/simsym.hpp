@@ -31,6 +31,14 @@ public:
 		data.erase(firstZero, data.end());
 		return *this;
 	}
+
+	simsym getDiff (){
+		std::vector<double> newData;
+		for (size_t i = 1; i < data.size(); i++){
+			newData.push_back(data[i] * i);
+		}
+		return newData;
+	}
 };
 
 simsym operator+ (simsym const &a, simsym const &b){
