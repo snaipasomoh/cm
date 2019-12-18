@@ -129,8 +129,17 @@ int main (int argc, char **argv){
 
 	eqVectors vec = vecForSpline(xVal, yVal, thomasMethod(vecForThomas(xVal, yVal)));
 	std::vector<simsym> splines = makeSplines(vec, xVal);
-	std::cout << getValInX(splines[1], 1.5) << std::endl;
-	std::cout << getValInX(splines[0].getDiff(), 1) << " " << getValInX(splines[1].getDiff(), 1) << std::endl;
+	std::cout << "Value in x = " << 1.5 << ": " << getValInX(splines[1], 1.5) << std::endl;
+
+	std::cout << std::endl;
+	for (size_t i = 0; i < vec.a.size(); i++){
+		std::cout << vec.a[i] << " " << vec.b[i] << " " << vec.c[i] << " " << vec.d[i];
+		std::cout << std::endl;
+	}
+	// std::cout << getValInX(splines[0].getDiff(), 1) << " " << getValInX(splines[1].getDiff(), 1) << std::endl;
+	// std::cout << getValInX(splines[1].getDiff(), 2) << " " << getValInX(splines[2].getDiff(), 2) << std::endl;
+	std::cout << getValInX(splines[2].getDiff(), 3) << " " << getValInX(splines[3].getDiff(), 3) << std::endl;
+	std::cout << getValInX(splines[2].getDiff().getDiff(), 3) << " " << getValInX(splines[3].getDiff().getDiff(), 3) << std::endl;
 	// for (auto i : thomasMethod(vec)){
 	// 	std::cout << i << std::endl;
 	// }

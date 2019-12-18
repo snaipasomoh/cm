@@ -23,7 +23,6 @@ std::vector<double> ssm (std::vector<double> const &x,
 			yxPows[j] += y[i] * std::pow(x[i], j);
 		}
 	}
-	// std::cout << "hello" << std::endl;
 	Eigen::MatrixXd A(k + 1, k + 1);
 	Eigen::VectorXd b(k + 1);
 	for (size_t i = 0; i < k + 1; i++){
@@ -31,6 +30,7 @@ std::vector<double> ssm (std::vector<double> const &x,
 			A(i, j) = xPows[i + j];
 		}
 		b(i) = yxPows[i];
+
 	}
 	auto sol = solveLS(A, b);
 	std::vector<double> res;
@@ -49,11 +49,54 @@ double getValInX (simsym const &pol, double x){
 }
 
 int main (int argc, char **argv){
-	std::vector<double> xVal {-1, 0, 1, 2, 3, 4};
-	std::vector<double> yVal {0.86603, 1, 0.86603, 0.5, 0, -0.5};
+	// std::vector<double> xVal {-1, 0, 1, 2, 3, 4};
+	// std::vector<double> yVal {0.86603, 1, 0.86603, 0.5, 0, -0.5};
+
+	// std::vector<double> xVal {-1, 0, 1, 2, 3, 4};
+	// std::vector<double> yVal {-0.5, 0, 0.5, 0.86603, 1, 0.86603};
+
+	// std::vector<double> xVal {-0.9, 0, 0.9, 1.8, 2.7, 3.6};
+	// std::vector<double> yVal {-0.36892, 0, 0.36892, 0.85408, 1.7856, 6.3138};
+
+	std::vector<double> xVal {1, 1.9, 2.8, 3.7, 4.6, 5.5};
+	std::vector<double> yVal {2.4142, 1.0818, 0.50953, 0.11836, -0.24008, -0.66818};
 	std::vector<double> F1 = ssm(xVal, yVal, 1);
 	std::vector<double> F2 = ssm(xVal, yVal, 2);
 	std::vector<double> F3 = ssm(xVal, yVal, 3);
+
+
+	std::cout << "Difference squares:" << std::endl;
+	std::cout << "F1:" << std::endl;
+	for (size_t i = 0; i < xVal.size(); i++){
+		std::cout << std::pow(getValInX(F1, xVal[i]) - yVal[i], 2) << " ";
+	}
+	std::cout << std::endl;
+	std::cout << "F2:" << std::endl;
+	for (size_t i = 0; i < xVal.size(); i++){
+		std::cout << std::pow(getValInX(F2, xVal[i]) - yVal[i], 2) << " ";
+	}
+	std::cout << std::endl;
+	std::cout << "F3:" << std::endl;
+	for (size_t i = 0; i < xVal.size(); i++){
+		std::cout << std::pow(getValInX(F3, xVal[i]) - yVal[i], 2) << " ";
+	}
+	std::cout << std::endl << std::endl;
+	// std::cout << "Abs(F1 - F2):" << std::endl;
+	for (size_t i = 0; i < xVal.size(); i++){
+		std::cout << yVal[i] << " ";
+	}
+	std::cout << std::endl;
+	for (size_t i = 0; i < xVal.size(); i++){
+		std::cout << getValInX(F1, xVal[i]) << " ";
+	}
+	std::cout << std::endl;
+	for (size_t i = 0; i < xVal.size(); i++){
+		std::cout << getValInX(F2, xVal[i]) << " ";
+	}
+	std::cout << std::endl;
+	for (size_t i = 0; i < xVal.size(); i++){
+		std::cout << std::abs(getValInX(F1, xVal[i]) - getValInX(F2, xVal[i])) << " ";
+	}
 
 
 
