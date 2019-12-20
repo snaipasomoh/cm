@@ -49,21 +49,37 @@ double getValInX (simsym const &pol, double x){
 }
 
 int main (int argc, char **argv){
-	// std::vector<double> xVal {-1, 0, 1, 2, 3, 4};
-	// std::vector<double> yVal {0.86603, 1, 0.86603, 0.5, 0, -0.5};
+	std::vector<double> xVal {-1, 0, 1, 2, 3, 4};
+	std::vector<double> yVal {0.86603, 1, 0.86603, 0.5, 0, -0.5};				//var2
 
 	// std::vector<double> xVal {-1, 0, 1, 2, 3, 4};
-	// std::vector<double> yVal {-0.5, 0, 0.5, 0.86603, 1, 0.86603};
+	// std::vector<double> yVal {-0.5, 0, 0.5, 0.86603, 1, 0.86603};			//var1
 
 	// std::vector<double> xVal {-0.9, 0, 0.9, 1.8, 2.7, 3.6};
-	// std::vector<double> yVal {-0.36892, 0, 0.36892, 0.85408, 1.7856, 6.3138};
+	// std::vector<double> yVal {-0.36892, 0, 0.36892, 0.85408, 1.7856, 6.3138};//var3
 
-	std::vector<double> xVal {1, 1.9, 2.8, 3.7, 4.6, 5.5};
-	std::vector<double> yVal {2.4142, 1.0818, 0.50953, 0.11836, -0.24008, -0.66818};
+	// std::vector<double> xVal {1, 1.9, 2.8, 3.7, 4.6, 5.5};
+	// std::vector<double> yVal {2.4142, 1.0818, 0.50953, 0.11836, -0.24008, -0.66818};//var4
+
+	// std::vector<double> xVal {0.1, 0.5, 0.9, 1.3, 1.7, 2.1};
+	// std::vector<double> yVal {-2.3026, -0.69315, -0.10536, 0.25236, 0.53063, 0.74194};//var5
+
+	// std::vector<double> xVal {-3, -2, -1, 0, 1, 2};
+	// std::vector<double> yVal {0.04979, 0.13534, 0.36788, 1, 2.7183, 7.3891};	//var6
+
 	std::vector<double> F1 = ssm(xVal, yVal, 1);
 	std::vector<double> F2 = ssm(xVal, yVal, 2);
 	std::vector<double> F3 = ssm(xVal, yVal, 3);
 
+
+	for (auto i : F1){
+		std::cout << i << " ";
+	}
+	std::cout << std::endl;
+	for (auto i : F2){
+		std::cout << i << " ";
+	}
+	std::cout << std::endl;
 
 	std::cout << "Difference squares:" << std::endl;
 	std::cout << "F1:" << std::endl;
@@ -81,7 +97,6 @@ int main (int argc, char **argv){
 		std::cout << std::pow(getValInX(F3, xVal[i]) - yVal[i], 2) << " ";
 	}
 	std::cout << std::endl << std::endl;
-	// std::cout << "Abs(F1 - F2):" << std::endl;
 	for (size_t i = 0; i < xVal.size(); i++){
 		std::cout << yVal[i] << " ";
 	}
@@ -97,6 +112,7 @@ int main (int argc, char **argv){
 	for (size_t i = 0; i < xVal.size(); i++){
 		std::cout << std::abs(getValInX(F1, xVal[i]) - getValInX(F2, xVal[i])) << " ";
 	}
+	std::cout << std::endl;
 
 
 
