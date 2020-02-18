@@ -60,9 +60,29 @@ double simpsonsMethod (double a, double b, double dx, double y (double)){
 }
 
 int main (int argc, char **argv){
-	std::cout << leftRect(0, 4, 1, mFunc) << std::endl;
-	std::cout << rightRect(0, 4, 1, mFunc) << std::endl;
-	std::cout << middleRect(0, 4, 1, mFunc) << std::endl;
-	std::cout << trapezMethod(0, 4, 1, mFunc) << std::endl;
-	std::cout << simpsonsMethod(0, 4, 1, mFunc) << std::endl;
+	std::cout << "Left rectangle: " << leftRect(0, 4, 1, mFunc) << std::endl;
+	std::cout << "Right rectangle: " << rightRect(0, 4, 1, mFunc) << std::endl;
+	std::cout << "Middle rectangle: " << middleRect(0, 4, 1, mFunc) << std::endl;
+	std::cout << "Trapezii: " << trapezMethod(0, 4, 1, mFunc) << std::endl;
+	std::cout << "Simpson: " << simpsonsMethod(0, 4, 1, mFunc) << std::endl;
+
+	std::cout << "Middle rectangle h/2: " << middleRect(0, 4, 0.5, mFunc) +
+							std::abs(middleRect(0, 4, 0.5, mFunc) -
+							middleRect(0, 4, 1, mFunc)) / 3 << std::endl;
+	std::cout << "Trapezii h/2: " << trapezMethod(0, 4, 0.5, mFunc) +
+							std::abs(trapezMethod(0, 4, 0.5, mFunc) -
+							trapezMethod(0, 4, 1, mFunc)) / 3 << std::endl;
+
+	std::cout << "Simpson h/2: " << simpsonsMethod(0, 4, 0.5, mFunc) +
+							std::abs(simpsonsMethod(0, 4, 0.5, mFunc) -
+							simpsonsMethod(0, 4, 1, mFunc)) / 15 << std::endl;
+
+
+							// std::cout << "Trapezii h/2: " << trapezMethod(0, 4, 0.5, mFunc) << " +- " <<
+							// 						std::abs(trapezMethod(0, 4, 0.5, mFunc) -
+							// 						trapezMethod(0, 4, 1, mFunc)) / 3 << std::endl;
+							//
+							// std::cout << "Simpson h/2: " << simpsonsMethod(0, 4, 0.5, mFunc) << " +- " <<
+							// 						std::abs(simpsonsMethod(0, 4, 0.5, mFunc) -
+							// 						simpsonsMethod(0, 4, 1, mFunc)) / 15 << std::endl;
 }

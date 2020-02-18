@@ -122,8 +122,12 @@ double getValInX (simsym const &pol, double x){
 }
 
 int main (int argc, char **argv){
-	std::vector<double> xVal {0, 1, 2, 3, 4};
-	std::vector<double> yVal {1, 0.86603, 0.5, 0, -0.5};
+	// std::vector<double> xVal {0, 1, 2, 3, 4};
+	// std::vector<double> yVal {1, 0.86603, 0.5, 0, -0.5
+
+	std::vector<double> xVal {0, 0.9, 1.8, 2.7, 3.6};
+	std::vector<double> yVal {0, 0.36892, 0.85408, 1.7856, 6,3138};
+
 	// std::vector<double> xVal {0.1, 0.5, 0.9, 1.3, 1.7};
 	// std::vector<double> yVal {-2.3026, -0.69315, -0.10536, 0.26236, 0.53063};
 
@@ -138,8 +142,10 @@ int main (int argc, char **argv){
 	}
 	// std::cout << getValInX(splines[0].getDiff(), 1) << " " << getValInX(splines[1].getDiff(), 1) << std::endl;
 	// std::cout << getValInX(splines[1].getDiff(), 2) << " " << getValInX(splines[2].getDiff(), 2) << std::endl;
-	std::cout << getValInX(splines[2].getDiff(), 3) << " " << getValInX(splines[3].getDiff(), 3) << std::endl;
-	std::cout << getValInX(splines[2].getDiff().getDiff(), 3) << " " << getValInX(splines[3].getDiff().getDiff(), 3) << std::endl;
+
+	// std::cout << getValInX(splines[2].getDiff(), 3) << " " << getValInX(splines[3].getDiff(), 3) << std::endl;
+	// std::cout << getValInX(splines[2].getDiff().getDiff(), 3) << " " << getValInX(splines[3].getDiff().getDiff(), 3) << std::endl;
+
 	// for (auto i : thomasMethod(vec)){
 	// 	std::cout << i << std::endl;
 	// }

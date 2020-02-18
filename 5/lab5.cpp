@@ -113,6 +113,9 @@ int main (int argc, char **argv){
 		std::cout << std::abs(getValInX(F1, xVal[i]) - getValInX(F2, xVal[i])) << " ";
 	}
 	std::cout << std::endl;
+	for (size_t i = 0; i < xVal.size(); i++){
+		std::cout << getValInX(F1, xVal[i]) - getValInX(F3, xVal[i]) << " ";
+	}
 
 
 
