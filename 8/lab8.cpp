@@ -29,6 +29,17 @@ std::vector<double> thomasMethod (eqVectors const &vec){
 	for (size_t i = 1; i < len; i++){
 		res.push_back(nd[len - i - 1] - nc[len - i - 1] * res[i - 1]);
 	}
+
+	std::cout << "Q: ";
+	for (auto i : nd){
+		std::cout << i << " ";
+	}
+	std::cout << std::endl << "P: ";
+	for (auto i : nc){
+		std::cout << i << " ";
+	}
+	std::cout << 0 << std::endl;
+
 	std::reverse(res.begin(), res.end());
 	return res;
 }

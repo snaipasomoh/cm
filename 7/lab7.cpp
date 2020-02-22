@@ -30,6 +30,8 @@ void forwStep (Matrix &matrix, double eps){
 			std::swap(matrix[i], matrix[maxInd]);
 		}
 
+
+
 		double div = matrix[i][i];
 		for (size_t j = i; j < len + 1; j++){
 			matrix[i][j] /= div;
@@ -44,6 +46,16 @@ void forwStep (Matrix &matrix, double eps){
 				}
 			}
 		}
+
+		if (i == 0){
+			printMatrix(matrix);
+			std::cout << std::endl;
+		}
+		if (i == 1){
+			std::cout << "max element index: " << maxInd << std::endl;
+
+		}
+
 	}
 }
 
@@ -55,8 +67,8 @@ std::vector<double> backStep (Matrix &matrix){
 		for (size_t j = 0; j < len - 1 - i; j++){
 			matrix[j][len] -= res[len - 1 - i] * matrix[j][len - 1 - i];
 		}
-		printMatrix(matrix);
-		std::cout << std::endl;
+		// printMatrix(matrix);
+		// std::cout << std::endl;
 	}
 	return res;
 }
@@ -72,7 +84,8 @@ int main (int argc, char **argv){
 											   {-6,  2,  0,  0, -16},
 											   { 0, -3,  8, -3,  -5}};
 
-
+	printMatrix(matrix);
+	std::cout << std::endl;
 	std::vector<double> res = gauss(matrix);
 	for (auto i : res){
 		std::cout << i << " ";
