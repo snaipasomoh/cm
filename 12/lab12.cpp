@@ -77,22 +77,38 @@ Matrix rotateMatrix (Matrix const &matrix,
 	return res;
 }
 
-Matrix jacobi (Matrix const &matrix, double eps = 0.001){
+double nonDiagSqSum (Matrix const &matrix){
+	size_t len = matrix.size();
+	double sqSum = 0;
+	for (size_t i = 0; i < len; i++){
+		for (size_t j = i + 1; j < len; j++){
+			sqSum += matrix[i][j] * matrix[i][j];
+		}
+	}
+	return std::sqrt(sqSum);
+}
+
+Matrix jacobi (Matrix const &matrix, double eps = 0.01){
 	Matrix m = matrix;
 	std::pair<size_t, size_t> coords = findPivot(matrix);
-	double pivot = std::abs(m[coords.first][coords.second]);
-	while (pivot > eps){
+	while (nonDiagSqSum(m) > eps){
 		m = rotateMatrix(m, coords);
 		coords = findPivot(m);
-		pivot = std::abs(m[coords.first][coords.second]);
 	}
 	return m;
 }
 
-int main (int argc, char **argv){
-	Matrix matrix = {{ 2, -1},
-	                 {-1, -3}};
+//TODO: find eigenvectors
+// std::vector<double> findEigenVector (Matrix const &matrix, double eigenVal){
+//
+// }
 
-	matrix = jacobi(matrix);
-	printMatrix(matrix);
+int main (int argc, char **argv){
+	Matrix matrix = {{-4,  1, -7},
+	                 { 1,  9,  1},
+	                 {-7,  1,  7}};
+
+	Matrix res = jacobi(matrix);
+	printMatrix(res);
+
 }
