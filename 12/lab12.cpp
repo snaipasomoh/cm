@@ -178,7 +178,6 @@ int main (int argc, char **argv){
 	                 { 1,  9,  1},
 	                 {-7,  1,  7}};
 
-	;
 	std::vector<double> eigenValues = jacobi(matrix);
 
 	for (size_t i = 0; i < eigenValues.size(); i++){
