@@ -36,7 +36,7 @@ std::vector<double> thomasMethod (eqVectors const &vec){
 	}
 	std::cout << std::endl << "P: ";
 	for (auto i : nc){
-		std::cout << i << " ";
+		std::cout << -i << " ";
 	}
 	std::cout << 0 << std::endl;
 
@@ -52,6 +52,7 @@ int main (int argc, char **argv){
 	foo.d = {-102, -92, -65, 38, -12};
 
 	std::vector<double> res = thomasMethod(foo);
+	std::cout << "X: ";
 	for (auto i : res){
 		std::cout << i << " ";
 	}

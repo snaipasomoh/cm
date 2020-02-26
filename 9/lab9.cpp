@@ -106,8 +106,11 @@ std::vector<double> zeidel (Matrix const &matrix,
 	std::vector<double> x = newFreePart;
 
 	while (vecNorm(subtract(mult(matrix, x), freePart)) > eps){
+		std::cout << vecNorm(subtract(mult(matrix, x), freePart)) << std::endl;
 		x = zeidSum(newMatrix, newFreePart, x);
 	}
+	std::cout << vecNorm(subtract(mult(matrix, x), freePart)) << std::endl;
+	std::cout << std::endl;
 	return x;
 }
 
@@ -117,6 +120,11 @@ int main (int argc, char **argv){
 	                 { 5,  5, 26,  7},
 	                 {-2, -6,  9, 24}};
 	std::vector<double> freePart = {50, 2, 273, 111};
+	// Matrix matrix = {{-2, -7, -8, -2},
+	//                  { 2,-17, -6, -2},
+	//                  {-7, -6,-23, -3},
+	//                  { 3, -2, -7,-13}};
+	// std::vector<double> freePart = {-51, 85, 71, 91};
 
 	std::vector<double> res = simIter(matrix, freePart);
 	for (double i : res){
