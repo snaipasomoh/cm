@@ -8,17 +8,32 @@
 	...
 */
 
-void plot (std::vector<double> const &x, std::vector<double> const &y){
+typedef std::vector<std::pair<std::string, std::vector<double>>> plotData;
+
+void plot (std::vector<double> const &x, plotData &data){
 	FILE *pipe = popen("gnuplot -persist", "w");
 	if (pipe){
-		std::string f;
+		std::vector<std::string> textData (data.size(), "");
 		for (size_t i = 0; i < x.size(); i++){
-			f += std::to_string(x[i]) + " " + std::to_string(y[i]) + "\n";
+			for (size_t j = 0; j < data.size(); j++){
+				textData[j] += std::to_string(x[i]) + " " +
+				               std::to_string(data[j].second[i]) + "\n";
+			}
 		}
 		fprintf(pipe, "set xrange [%lf:%lf]\n", x[0], x[x.size() - 1]);
 		fprintf(pipe, "set autoscale y\n");
-		fprintf(pipe, "plot '-' title \"y(x)\" w l lc 1 lw 3\n");
-		fprintf(pipe, "%se\n", f.c_str());
+		std::string req = "plot";
+		std::string foo = " '-' ";
+		for (size_t i = 0; i < data.size(); i++){
+			req += foo + "title \"" + data[i].first + "\" w l lw 3, ";
+			foo = " '' ";
+		}
+		req.pop_back();
+		req += "\n";
+		fprintf(pipe, "%s", req.c_str());
+		for (size_t i = 0; i < data.size(); i++){
+			fprintf(pipe, "%se\n", textData[i].c_str());
+		}
 		fflush(pipe);
 	
 		std::cin.clear();
@@ -57,7 +72,8 @@ void solve (double x0, double x1, double y0, double z0, double h = H1,
 		y += h / 2 * (z1t + z1);
 	}
 	if (plotting){
-		plot(xv, yv);
+		plotData foo = {std::make_pair(std::string("y(x)"), yv)};
+		plot(xv, foo);
 	}
 }
 
