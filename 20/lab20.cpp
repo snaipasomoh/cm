@@ -11,7 +11,7 @@ int main (int argc, char **argv){
 	double rx = M_PI;
 	size_t N = 10;
 	size_t K = 1000;
-	double T = 10;
+	double T = 20;
 	double h = (rx - lx) / N;
 	double tau = T / K;
 
@@ -56,18 +56,19 @@ int main (int argc, char **argv){
 	Gnuplot gp;
 	gp << "set ticslevel 0" << std::endl;
 	gp << "set xrange[0:3.14159265358979323846]" << std::endl;
-	gp << "set yrange[0:10]" << std::endl;
+	gp << "set yrange[0:20]" << std::endl;
 	gp << "set xlabel \"X\"" << std::endl;
 	gp << "set ylabel \"Temperature\"" << std::endl;
-	gp << "set dgrid3d 21,11" << std::endl;
 	gp << "set hidden3d" << std::endl;
 
 	gp << "splot '-' with lines title \"U(x, t)\"" << std::endl;
 
-	for (size_t i = 0; i <= K; i += (K / 20)){
+	for (size_t i = 0; i <= K; i += (K / 200)){
 		for (size_t j = 0; j <= N; j++){
-			gp << j * h + lx << " " << i * tau << " " << res[i][j] << std::endl;
+			gp << (N - j) * h + lx << " " << i * tau << " " << res[i][N - j]
+			<< std::endl;
 		}
+		gp << std::endl;
 	}
 	gp << "e" << std::endl;
 	std::cin.get();

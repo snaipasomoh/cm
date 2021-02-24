@@ -54,15 +54,16 @@ int main (int argc, char **argv){
 	gp << "set yrange[0:10]" << std::endl;
 	gp << "set xlabel \"X\"" << std::endl;
 	gp << "set ylabel \"Temperature\"" << std::endl;
-	gp << "set dgrid3d 21,11" << std::endl;
 	gp << "set hidden3d" << std::endl;
 
 	gp << "splot '-' with lines title \"U(x, t)\"" << std::endl;
 
 	for (size_t i = 0; i <= K; i += (K / 20)){
 		for (size_t j = 0; j <= N; j++){
-			gp << j * h + lx << " " << i * tau << " " << res[i][j] << std::endl;
+			gp << (N - j) * h + lx << " " << i * tau << " " << res[i][N - j]
+			<< std::endl;
 		}
+		gp << std::endl;
 	}
 	gp << "e" << std::endl;
 	std::cin.get();
