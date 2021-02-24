@@ -1,7 +1,8 @@
+// g++ lab19.cpp -o lab19 -lboost_iostreams -lboost_system -lboost_filesystem
+
 #include <iostream>
 #include <vector>
 #include <cmath>
-#include <utility>
 #include <gnuplot-iostream.h>
 
 typedef std::vector<std::vector<double>> Matrix;
@@ -10,18 +11,20 @@ int main (int argc, char **argv){
 	double a = 1;
 	double b = 1;
 	double lx = 0;
-	double rx = 2 * M_PI;
+	double rx = M_PI;
 	size_t N = 10;
-	size_t K = 10;
-	double T = 1;
+	size_t K = 1000;
+	double T = 10;
 	double h = (rx - lx) / N;
 	double tau = T / K;
 
 	auto left = [](double t, double a, double b){
 		return exp(-a * t) * (-cos(b * t) + sin(b * t));
+		// return cos(b * t);
 	};
 	auto right = [](double t, double a, double b){
 		return -exp(-a * t) * (cos(b * t) + sin(b * t));
+		// return cos(b * t - M_PI);
 	};
 	Matrix res(1, std::vector<double>());
 
@@ -47,23 +50,20 @@ int main (int argc, char **argv){
 
 	Gnuplot gp;
 	gp << "set ticslevel 0" << std::endl;
-	gp << "set xrange[0:6.283185307179587]" << std::endl;
-	gp << "set yrange[0:1]" << std::endl;
+	gp << "set xrange[0:3.14159265358979323846]" << std::endl;
+	gp << "set yrange[0:10]" << std::endl;
 	gp << "set xlabel \"X\"" << std::endl;
 	gp << "set ylabel \"Temperature\"" << std::endl;
-	gp << "set dgrid3d 11,11" << std::endl;
+	gp << "set dgrid3d 21,11" << std::endl;
 	gp << "set hidden3d" << std::endl;
-	// gp << "set logscale z" << std::endl;
+
 	gp << "splot '-' with lines title \"U(x, t)\"" << std::endl;
-	for (size_t i = 0; i <= K; i++){
+
+	for (size_t i = 0; i <= K; i += (K / 20)){
 		for (size_t j = 0; j <= N; j++){
-			// gp.send(boost::make_tuple(j * h + lx, i * tau, res[i][j]));
 			gp << j * h + lx << " " << i * tau << " " << res[i][j] << std::endl;
-			std::cout << j * h + lx << " " << i * tau << " " << res[i][j] << std::endl;
 		}
 	}
 	gp << "e" << std::endl;
 	std::cin.get();
 }
-
-// g++ lab19.cpp -o lab19 -lboost_iostreams -lboost_system -lboost_filesystem
