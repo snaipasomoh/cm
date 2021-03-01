@@ -41,9 +41,13 @@ int main (int argc, char **argv){
 			(a * (res[i - 1][j + 1] - 2 * res[i - 1][j] + res[i - 1][j - 1])
 			/ h / h - b * (res[i - 1][j + 1] - res[i - 1][j - 1]) / 2 / h) + 
 			res[i - 1][j]);
+			// tau * 
+			// ((a / h / h + b / 2 / h) * res[i - 1][j + 1] +
+			//  (1 / tau - 2 * a / h / h) * res[i - 1][j] +
+			//  (a / h / h - b / 2 / h) * res[i - 1][j - 1]));
 		}
 		newRow[0] = (newRow[1] - h * left(i * tau, a, b)) / (h + 1);
-		newRow.push_back((newRow[N - 1] + h * right(i * tau, a, b)) / (1 - h));
+		newRow.push_back((newRow[N - 1] + h * right(i * tau, a, b)) / (1 + h));
 
 		res.push_back(newRow);
 	}
