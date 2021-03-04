@@ -11,8 +11,8 @@ int main (int argc, char **argv){
 	double x2 = M_PI_2;
 	double y1 = 0;
 	double y2 = M_PI_2;
-	size_t N = 10;
-	size_t K = 10;
+	size_t N = 100;
+	size_t K = 100;
 	double eps = 0.001;
 
 	double h1 = (x2 - x1) / N;
@@ -54,12 +54,12 @@ int main (int argc, char **argv){
 				(2 * h1 * h1 + 2 * h2 * h2 - 3 * h1 * h1 * h2 * h2);
 
 				double td = fabs(res[i][j] - temp);
-				std::cout << temp << " " << res[i][j] << " " << td << std::endl;
+				// std::cout << temp << " " << res[i][j] << " " << td << std::endl;
 				maxD = (maxD < td) ? td : maxD;
 			}
 		}
 		delta = maxD;
-		std::cout << delta << std::endl;
+		// std::cout << delta << std::endl;
 	}
 
 	Gnuplot gp;
